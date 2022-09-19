@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[TOC] Git版本控制工具1、Git 简介**分布式版本控制系统  （Distributed Version Control System，简称 DVCS） ** 在这类系统中，客户端并不只提取最新版本的文件快照， 而是把代码仓库完整地镜像下来，包括完整的历史记录。 这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] Git版本控制工具1、Git 简介**分布式版本控制系统  （Distributed Version Control System，简称 DVCS） ** 在这类系统中，客户端并不只提取最新版本的文件快照， 而是把代码仓库完整地镜像下来，包括完整的历史记录。 这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/index/1660635760523.png">
+<meta property="og:image" content="http://example.com/image/index/f69d3f39-4aa7-42b5-b6b1-d5f4e91fc3d2.png">
+<meta property="og:image" content="http://example.com/image/index/aa5f1758-79c2-4c4a-9e62-225cab7d0fce.png">
+<meta property="og:image" content="http://example.com/image/index/5be2cba6-10ea-4505-8345-ae940a952863.png">
+<meta property="og:image" content="http://example.com/image/index/4903918b-8122-403f-9640-79f015b02acb.jpg">
+<meta property="og:image" content="http://example.com/image/index/b4401e8d-81bb-4ebd-b084-e39c089de55e.png">
+<meta property="og:image" content="http://example.com/image/index/4812bf6c-c99f-412f-87f5-fcf2f85b3621.png">
+<meta property="og:image" content="http://example.com/image/index/a4e2a57e-9674-41bc-b6a4-2010f3f3b6d3.png">
+<meta property="og:image" content="http://example.com/image/index/0add7f7c-74d8-448b-a63b-dc5f4e9152af.png">
+<meta property="og:image" content="http://example.com/image/index/34c5fc6c-15b9-43e9-83f7-f128681b0091.png">
+<meta property="og:image" content="http://example.com/image/index/077d25f6-9b2e-4f98-b807-eb01e002f18e.png">
+<meta property="og:image" content="http://example.com/image/index/4670dd15-2070-4f8c-91c7-cee59ebbe649.png">
+<meta property="og:image" content="http://example.com/image/index/b1bf0778-4281-41f6-841d-977f41d7c8f1.png">
+<meta property="og:image" content="http://example.com/image/index/5b868d2a-f47c-4ca4-a4e4-3239438c874d.png">
+<meta property="og:image" content="http://example.com/image/index/fc0e3553-c117-432e-b417-f5c4aa5aea3e.png">
+<meta property="og:image" content="http://example.com/image/index/007d3607-461d-4493-b6ff-5fd44c0e28b4.png">
+<meta property="og:image" content="http://example.com/image/index/b54ec87b-431d-47e9-a756-e10da2cd33ad.png">
+<meta property="og:image" content="http://example.com/image/index/fd505ec9-1366-4f48-8ffa-9d78cc075603.png">
+<meta property="og:image" content="http://example.com/image/index/a4612c5b-e3f5-49a7-b947-6a01c6e9cb6f.png">
+<meta property="og:image" content="http://example.com/image/index/3e537972-6203-4643-a25b-f7ad645c3420.png">
+<meta property="og:image" content="http://example.com/image/index/086a0016-2346-46e3-8c06-4f521a81d1d6.png">
+<meta property="og:image" content="http://example.com/image/index/7008e271-8d0b-4a1a-a7a5-df308020cd53.png">
+<meta property="og:image" content="http://example.com/image/index/13046afb-6f80-456d-9e2a-6b4d2f8b0a55.png">
+<meta property="og:image" content="http://example.com/image/index/a25091c2-1cb1-4e79-a186-52979883d779.png">
+<meta property="og:image" content="http://example.com/image/index/5fa6c03d-49c2-4633-aa00-5bafdcec34f1.png">
+<meta property="og:image" content="http://example.com/image/index/1a36090e-fbf0-4a80-906b-b173d491abb0.png">
+<meta property="og:image" content="http://example.com/image/index/c7a6d6ab-56e4-440e-b4c7-5a9367c997ae.png">
+<meta property="og:image" content="http://example.com/image/index/173dbaaf-e03f-4575-9398-cd50fbf9ce4a.png">
+<meta property="og:image" content="http://example.com/image/index/75ea6817-aa9d-4509-b15f-0a69907fc9b4.png">
+<meta property="og:image" content="http://example.com/image/index/16b0634c-b07b-4252-9442-b162d2a0e6a1.jpg">
+<meta property="og:image" content="http://example.com/image/index/48c015b5-9a81-432e-8123-ba10ba534c55.png">
+<meta property="og:image" content="http://example.com/image/index/c7a0fd01-2136-457e-9001-88c32bee75b5.jpg">
+<meta property="og:image" content="http://example.com/image/index/a059543e-d317-4996-b1ab-4832d0123d15.jpg">
+<meta property="og:image" content="http://example.com/image/index/0cdc9019-293e-434d-8daa-d9a959547c3d.jpg">
+<meta property="og:image" content="http://example.com/image/index/ae5b3019-976f-4eea-b3db-39703eeddeb2.png">
+<meta property="og:image" content="http://example.com/image/index/ee7e4e03-7b75-4607-a4cc-6bde8f55d0dd.png">
+<meta property="og:image" content="http://example.com/image/index/ee187380-4638-4d09-8613-1583cd0ca9a7.png">
+<meta property="og:image" content="http://example.com/image/index/60a1c3db-4e2f-4c26-a7ae-6369cec7abe6.png">
+<meta property="og:image" content="http://example.com/image/index/41ddb006-08ec-4449-9c2c-83f3339a709c.png">
+<meta property="og:image" content="http://example.com/image/index/5d4156ca-caa6-428a-a2a8-f3cda952ba6e.png">
+<meta property="og:image" content="http://example.com/image/index/1610702400021.png">
+<meta property="article:published_time" content="2022-09-19T07:08:41.000Z">
+<meta property="article:modified_time" content="2022-09-19T07:11:28.781Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image/index/1660635760523.png">
+  
+  
+  
+  <title>About - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="About"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+            <div class="about-avatar">
+              <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
+            </div>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="text-center">
+  <div class="about-info">
+    <div class="about-name">Fluid</div>
+    <div class="about-intro">An elegant theme for Hexo</div>
+    <div class="about-icons">
+      
+        
+        
+        
+        <a href=https://github.com class="
+           hint--bottom hint--rounded"
+           aria-label=GitHub
+           target="_blank"
+        >
+          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
+          
+        </a>
+      
+        
+        
+        
+        <a href=https://douban.com class="
+           hint--bottom hint--rounded"
+           aria-label=豆瓣
+           target="_blank"
+        >
+          <i class="iconfont icon-douban-fill" aria-hidden="true"></i>
+          
+        </a>
+      
+        
+        
+        
+        <a  class="qr-trigger
+           "
+           
+           target="_self"
+        >
+          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
+          
+            <img class="qr-img" src="/img/favicon.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
+          
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+<article class="about-content page-content mt-5">
+  <div class="markdown-body">
+    <p>[TOC]</p>
+<h1 id="Git版本控制工具"><a href="#Git版本控制工具" class="headerlink" title="Git版本控制工具"></a>Git版本控制工具</h1><h1 id="1、Git-简介"><a href="#1、Git-简介" class="headerlink" title="1、Git 简介"></a>1、Git 简介</h1><p>**分布式版本控制系统  （<code>Distributed Version Control System</code>，简称 <code>DVCS</code>） **</p>
+<p>在这类系统中，客户端并不只提取最新版本的文件快照， 而是把代码仓库完整地镜像下来，包括完整的历史记录。 这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次对代码仓库的完整备份。 </p>
+<p>不仅如此，许多这类系统都可以指定和若干不同的远端代码仓库进行交互。这样一来，你就可以在同一个项目中，分别和不同工作小组的人相互协作。 </p>
+<p><img src="/image/index/1660635760523.png" srcset="/img/loading.gif" lazyload alt="1660635760523"> </p>
+<blockquote>
+<p>集中式和分布式版本控制系统有什么区别呢？</p>
+<ul>
+<li>集中式版本控制系统，版本库是集中存放在中央服务器的，最大的毛病就是必须联网才能工作。 </li>
+<li>分布式版本控制系统根本没有”中央服务器“，每个人的电脑上都是一个完整的版本库。</li>
+</ul>
+</blockquote>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</span> <span class="hljs-string"></span><br><span class="hljs-attr">在实际使用分布式版本控制系统的时候，其实很少在两人之间的电脑上推送版本库的修改，因为可能你们俩不在一个局域网内，两台电脑互相访问不了，也可能今天你的同事病了，他的电脑压根没有开机。因此，分布式版本控制系统通常也有一台充当“中央服务器”的电脑，但这个服务器的作用仅仅是用来方便“交换”大家的修改，没有它大家也一样干活，只是交换修改不方便而已。</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>Git</strong></p>
+<p>Git 是一个开源的分布式版本控制系统，旨在快速高效地处理从小型到大型项目的所有内容。【C语言编写】</p>
+<ul>
+<li>工作区：就是你在电脑里能看到的目录，用于添加、编辑、修改文件等动作</li>
+<li>暂存区：暂存已经修改的文件，最后统一提交到Git仓库中</li>
+<li>版本库：最终确定的文件保存到仓库，称为一个新的版本，并且对他人可见</li>
+</ul>
+<p><strong>Git 与 SVN 对比</strong></p>
+<ul>
+<li><p><strong>最核心的区别</strong>：Git 是分布式的，SVN 是集中式的版本控制系统。</p>
+</li>
+<li><p>Git 把内容按元数据方式存储，而SVN是按文件</p>
+<blockquote>
+<p>Git 所有的资源控制系统都是把文件的元信息隐藏在一个类似 .svn，.cvs等的文件夹里。</p>
+</blockquote>
+</li>
+<li><p>Git 分支和 SVN 的分支不同</p>
+<blockquote>
+<p>分支在 SVN 中一点不特别，就是版本库中的另外的一个目录。</p>
+</blockquote>
+</li>
+<li><p>Git 没有一个全局的版本号，而 SVN 有</p>
+<blockquote>
+<p>目前为止这是跟 SVN 相比 Git 缺少的最大的一个特征。</p>
+</blockquote>
+</li>
+<li><p>Git 的内容完整性要优于 SVN </p>
+<blockquote>
+<p>Git 的内容存储使用的是SHA-1哈希算法，这能确保代码内容的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的破坏。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="2、Git安装"><a href="#2、Git安装" class="headerlink" title="2、Git安装"></a>2、Git安装</h1><h2 id="1、安装Git"><a href="#1、安装Git" class="headerlink" title="1、安装Git"></a>1、安装Git</h2><p><strong>windows上安装Git</strong></p>
+<ol>
+<li><p>使用官方版本安装<br>直接官网下载（ <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> 选择相应的版本即可），安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
+</li>
+<li><p><code>Chocolatey</code> 自动安装</p>
+<p>如果要进行自动安装，你可以使用 <code>Git Chocolatey</code> 包。 注意 <code>Chocolatey</code> 包是由社区维护的。</p>
+<p><code>Chocolatey</code> 官网：<a target="_blank" rel="noopener" href="https://chocolatey.org/">https://chocolatey.org</a></p>
+<p>安装好 <code>Chocolatey</code> 后，执行如下命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">choco install git.install<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="3、Git管理文件版本"><a href="#3、Git管理文件版本" class="headerlink" title="3、Git管理文件版本"></a>3、Git管理文件版本</h1><h2 id="1、Git基础设置"><a href="#1、Git基础设置" class="headerlink" title="1、Git基础设置"></a>1、Git基础设置</h2><ul>
+<li><p>设置用户名和邮箱（同gitHub）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">git config --global user.name &quot;Your Name&quot;<br>git config --global user.email &quot;email@example.com&quot;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<code>git config</code>命令的–<code>global参数</code>，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+</blockquote>
+<p>查看设置</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">git config user.name<br>git config user.email<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>删除配置属性<br><code>git config --global --unset user.name</code></p>
+</li>
+<li><p>查看当前Git环境所有配置<br><code>git config --list</code> 查看当前Git环境所有配置</p>
+</li>
+</ul>
+<blockquote>
+<p>退出vim编辑器</p>
+<blockquote>
+<p>方法1：一直按住esc ，再连续按大写的z两次就退出来了。</p>
+<p>方法2：只要你按住shift键盘，下面的这些命令都可以用：<br> 1、按Esc 就可以进入命令行模式也是系统默认模式<br> 2、输入模式可以按 o i a 都可以进入 退出可以进入末行和命令行模式<br> 3、末行模式可以按ctrl+；它的主要功能是退出编辑器 也可以保存退出文档<br> 4、q! 【强制退出不保存】 q【退出不保存】 wq【退出并保存后面也可以加个！】只是，用wq的时候，要先esc，然后按住shift键</p>
+</blockquote>
+</blockquote>
+<h2 id="2、创建版本库"><a href="#2、创建版本库" class="headerlink" title="2、创建版本库"></a>2、创建版本库</h2><blockquote>
+<p>什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
+</blockquote>
+<ol>
+<li><p>建立目录</p>
+<p>pwd命令用于显示当前目录。</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> learngit</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> learngit</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">pwd</span></span><br>/Users/michael/learngit<br></code></pre></td></tr></table></figure>
+
+<p><img src="/image/index/f69d3f39-4aa7-42b5-b6b1-d5f4e91fc3d2.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<ol>
+<li>设置目录为Git仓库</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git init</span><br>Initialized empty Git repository in /Users/michael/learngit/.git/<br></code></pre></td></tr></table></figure>
+
+<p><img src="/image/index/aa5f1758-79c2-4c4a-9e62-225cab7d0fce.png" srcset="/img/loading.gif" lazyload alt="img">  </p>
+<p>仓库建好后，会被告知这是一个空的仓库（empty Git repository)，而且当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<ol>
+<li><p>把文件添加到版本库（需要先在仓库中创建文件） </p>
+<ol>
+<li><p>使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件； </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add readme.txt</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用命令<code>git commit -m &lt;message&gt;</code>，完成 </p>
+<p>例： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -m <span class="hljs-string">&quot;wrote a readme file&quot;</span></span>   <br>[master (root-commit) eaadf4e] wrote a readme file <br>1 file changed, 2 insertions(+)    <br>create mode 100644 readme.txt<br></code></pre></td></tr></table></figure>
+
+<p> 命令执行成功后会告诉你，1 file changed：1个文件被改动（我们新添加的readme.txt文件）；2 insertions：插入了两行内容（readme.txt有两行内容）</p>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>注意：Git命令必须在Git仓库目录内执行（<code>git init</code>除外），在仓库目录外执行是没有意义的。<br>添加某个文件时，该文件必须在当前目录下存在，用<code>ls</code>或者<code>dir</code>命令查看当前目录的文件，看看文件是否存在，或者是否写错了文件名。</p>
+</blockquote>
+<h2 id="3、版本回退"><a href="#3、版本回退" class="headerlink" title="3、版本回退"></a>3、版本回退</h2><ul>
+<li><code>git reset</code>命令返回到任意版本中：git reset –hard 版本id</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git reset --hard HEAD^</span><br>HEAD is now at e475afc add distributed<br></code></pre></td></tr></table></figure>
+
+<p>用HEAD表示当前版本，也就是最新的提交1094adb…（注意我的提交ID和你的肯定不一样），上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个^比较容易数不过来，所以写成<code>HEAD~100</code><br> 若是要返回到指定版本，则直接：<code>git reset --hard 版本id</code><br> 版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</p>
+<ul>
+<li><code>git log</code>命令查看提交历史，可确定要回退的版本id<br><img src="/image/index/5be2cba6-10ea-4505-8345-ae940a952863.png" srcset="/img/loading.gif" lazyload alt="img"><br><code>$ git log --pretty=oneline</code>参数–pretty&#x3D;oneline表示仅显示提交的版本号和信息</li>
+<li><code>git reflog</code>命令查看命令历史，可确定要回到未来的哪个版本</li>
+</ul>
+<h2 id="4、工作区和暂存区"><a href="#4、工作区和暂存区" class="headerlink" title="4、工作区和暂存区"></a>4、工作区和暂存区</h2><p><img src="/image/index/4903918b-8122-403f-9640-79f015b02acb.jpg" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<ul>
+<li><p>工作区（指定的文件夹）<br>就是你在电脑里能看到的目录，用于添加、编辑、修改文件等动作</p>
+</li>
+<li><p>版本库（隐藏目录：.git） </p>
+<p>最终确定的文件保存到仓库，称为一个新的版本，并且对他人可见 </p>
+<ul>
+<li>Git为我们自动创建第一个分支master，以及指向master的一个指针叫HEAD</li>
+<li>git commit命令上就是把暂存区的所有内容提交到当前分支</li>
+</ul>
+</li>
+<li><p>暂存区&#x2F;索引（.git&#x2F;index或者叫stage） </p>
+<p>暂存已经修改的文件，最后统一提交到Git仓库中 </p>
+<ul>
+<li>git add命令是把文件修改添加到暂存区</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Git管理的文件分为：工作区，版本库，<br>版本库又分为暂存区stage和暂存区分支master(仓库)<br>工作区&gt;&gt;&gt;&gt;暂存区&gt;&gt;&gt;&gt;分支仓库<br><br>git <span class="hljs-keyword">add</span>把文件从工作区&gt;&gt;&gt;&gt;暂存区，<br>git <span class="hljs-keyword">commit</span>把文件从暂存区&gt;&gt;&gt;&gt;仓库，<br><br>git <span class="hljs-keyword">add</span>的反向命令git checkout <span class="hljs-comment">-- file，撤销工作区修改，即把暂存区最新版本转移到工作区，</span><br><br>git <span class="hljs-keyword">commit</span>的反向命令git <span class="hljs-keyword">reset</span> HEAD &lt;file&gt;，就是把仓库最新版本转移到暂存区。<br><br>git diff查看工作区和暂存区差异，<br>git diff <span class="hljs-comment">--cached查看暂存区和仓库差异，</span><br>git diff HEAD 查看工作区和仓库的差异，<br><br>git status就是单纯看工作区情况<br><br>rm 文件 在工作区中删除文件<br>git rm 文件，git <span class="hljs-keyword">commit</span>提交删除，可从版本库中删除文件<br></code></pre></td></tr></table></figure>
+
+<h1 id="4、远程仓库"><a href="#4、远程仓库" class="headerlink" title="4、远程仓库"></a>4、远程仓库</h1><h2 id="1、添加远程库"><a href="#1、添加远程库" class="headerlink" title="1、添加远程库"></a>1、添加远程库</h2><blockquote>
+<p>本地库推送到远程库</p>
+</blockquote>
+<ol>
+<li><p>在GitHub创建新库（同本地库同名）</p>
+</li>
+<li><p>使用SSH key公钥关联本地库和GitHub<br><img src="/image/index/b4401e8d-81bb-4ebd-b084-e39c089de55e.png" srcset="/img/loading.gif" lazyload alt="img"><br>在本地库下运行：<code>$ git remote add origin git@github.com:121cai/GitRepository.git</code><br>origin是Git默认的远程库的名字<br>移除远程库：<code>git remote remove origin</code></p>
+</li>
+<li><p>把本地库的所有内容推送到远程库上<br><code>$ git push -u origin master</code><br>第一次推送，使用-u参数（之后推送不需要-u参数），Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+</li>
+<li><p>GitHub如何配置SSH Key</p>
+<ul>
+<li><p>目的<br>GitHub配置SSH Key的目的是为了帮助我们在通过git提交代码是，不需要繁琐的验证过程，简化操作流程。</p>
+</li>
+<li><p>方法</p>
+<ol>
+<li><p>设置git的user name和email</p>
+<blockquote>
+<p>待确认：用 git config –global 把user.name和user.email全部重置，email出错可能性不大，但是那个user.name，是github登录之后，鼠标放在右上角的头像那里，显示signed in as XXXX中的XXXX</p>
+</blockquote>
+</li>
+<li><p>检查是否存在SSH Key</p>
+<ol>
+<li>跳转目录：<code>cd ~/.ssh</code></li>
+</ol>
+</li>
+<li><p>显示ssh：<code>ls</code>或者<code>ll</code>，看是否存在 id_rsa 和 id_rsa.pub文件，如果存在，说明已经有SSH Key。（Rsa是算法名称。常用算法有：rsa, dsa。） </p>
+<ol>
+<li>若不存在，则需要生成SSH key：<code>ssh-keygen -t rsa -C &quot;邮箱&quot;</code></li>
+<li>获取SSH：<code>cat id_rsa.pub</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>  &#x2F;&#x2F;  手动拷贝秘钥（ssh-rsa开头） </p>
+<ol>
+<li>GitHub添加SSH Key<br>GitHub点击用户头像，选择setting，新建一个SSH Key，取个名字，把之前拷贝的秘钥复制进去<br><img src="/image/index/4812bf6c-c99f-412f-87f5-fcf2f85b3621.png" srcset="/img/loading.gif" lazyload alt="img"> </li>
+<li>验证和修改</li>
+</ol>
+<ul>
+<li>测试是否成功配置SSH Key： <code>ssh -T git@github.com</code><ul>
+<li>修改Http的链接为SSH：直接修改项目目录下 .git文件夹下的config文件，将地址修改一下就好了<br>直接修改项目目录下 .git文件夹下的config文件，将地址修改一下就好了</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-number">1</span>、打开Git Bash<br><span class="hljs-number">2</span>、输入邮箱地址<br>​```ssh-keygen -t rsa -C <span class="hljs-string">&quot;邮箱&quot;</span>```<br><span class="hljs-number">3</span>、生成密钥对<br>Generating <span class="hljs-keyword">public</span>/<span class="hljs-keyword">private</span> rsa key pair.<br>- 直接输入Enter即可<br><span class="hljs-number">4</span>、输入保存密钥对的文件地址<br>Enter <span class="hljs-keyword">file</span> in which to save the key (<span class="hljs-regexp">/c/U</span>sers<span class="hljs-regexp">/Administrator.USER-20171012UT/</span>.ssh/id_rsa):<br><br>- 默认使用<span class="hljs-regexp">/c/U</span>sers<span class="hljs-regexp">/you/</span>.ssh<br>- 生成id_rsa以及id_rsa.pub两个文件<br>- 直接输入Enter即可<br><br><span class="hljs-number">5</span>、输入密钥对密码<br>Enter passphrase (empty <span class="hljs-keyword">for</span> no passphrase):<br>Enter same passphrase again:<br><br>- 如果输入密码则在每次启动Pageant时，需输入一次密码。若当前工作电脑需多人共用，建议加入密码，并在每次操作完毕后关闭Pageant。<br></code></pre></td></tr></table></figure>
+
+<p><img src="/image/index/a4e2a57e-9674-41bc-b6a4-2010f3f3b6d3.png" srcset="/img/loading.gif" lazyload alt="img"><br> <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000009177002">Git使用密钥对</a><br> <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013778905/article/details/83501204">GitHub如何配置SSH Key</a></p>
+<h2 id="2、从远程库克隆"><a href="#2、从远程库克隆" class="headerlink" title="2、从远程库克隆"></a>2、从远程库克隆</h2><blockquote>
+<p>远程库以及其内容克隆到本地</p>
+</blockquote>
+<p><code>git clone git@github.com:121cai/test.git</code><br> <img src="/image/index/0add7f7c-74d8-448b-a63b-dc5f4e9152af.png" srcset="/img/loading.gif" lazyload alt="img">  </p>
+<h1 id="5、分支管理"><a href="#5、分支管理" class="headerlink" title="5、分支管理"></a>5、分支管理</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">在版本回退里，已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即<span class="hljs-literal">master</span>分支。<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>查看当前分支：<code>git branch</code>，当前分支前面会标一个 * 号<br><img src="/image/index/34c5fc6c-15b9-43e9-83f7-f128681b0091.png" srcset="/img/loading.gif" lazyload alt="img"><br>HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。每次提交，master分支都会向前移动一步，这样，随着你不断提交，master分支的线也越来越长。<br><img src="/image/index/077d25f6-9b2e-4f98-b807-eb01e002f18e.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+</li>
+<li><p>创建分支：<code>git checkout -b dev</code>或者<code>git swith -c dev</code>命令 </p>
+<p>创建新的分支，例如dev时，Git新建了一个指针叫dev，指向master相同的提交，再把HEAD指向dev，就表示当前分支在dev上 </p>
+<p>git checkout命令加上-b参数表示创建并切换，相当于以下两条命令： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout dev</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p> 从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，dev指针往前移动一步，而master指针不变</p>
+</li>
+<li><p>切换分支<code>git checkout master</code>或者<code>git swith</code>命令<br><strong>在其他分支上修改文件并提交后，切换分支后，工作区的文件也会切换后的分支上的文件（未修改前的文件）</strong><br><img src="/image/index/4670dd15-2070-4f8c-91c7-cee59ebbe649.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/b1bf0778-4281-41f6-841d-977f41d7c8f1.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+</li>
+<li><p>合并分支<code>git merge dev</code>（把dev分支的工作成果合并到master分支上）<br><img src="/image/index/5b868d2a-f47c-4ca4-a4e4-3239438c874d.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/fc0e3553-c117-432e-b417-f5c4aa5aea3e.png" srcset="/img/loading.gif" lazyload alt="img"><br>合并之后，工作区的数据就变回了dev提交后的数据了。</p>
+<blockquote>
+<p>注意：若两个分支同时修改提交了数据，合并的话就会出现冲突，需要手动处理冲突<br><img src="/image/index/007d3607-461d-4493-b6ff-5fd44c0e28b4.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/b54ec87b-431d-47e9-a756-e10da2cd33ad.png" srcset="/img/loading.gif" lazyload alt="img"><br>Git用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code><br>若不接触冲突，当前仓库会一直处于合并状态（&#x2F;d&#x2F;GitRepository (master|MERGING)，哪怕分支已被删除。<br><img src="/image/index/fd505ec9-1366-4f48-8ffa-9d78cc075603.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+</blockquote>
+</li>
+<li><p>删除分支<code>git branch -d dev</code><br><img src="/image/index/a4612c5b-e3f5-49a7-b947-6a01c6e9cb6f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+</ul>
+<h1 id="6、开发软件中使用git"><a href="#6、开发软件中使用git" class="headerlink" title="6、开发软件中使用git"></a>6、开发软件中使用git</h1><h2 id="1、Eclipse中使用git"><a href="#1、Eclipse中使用git" class="headerlink" title="1、Eclipse中使用git"></a>1、Eclipse中使用git</h2><p>可通过help-About Eclipse查看是否支持git，不支持的话需要自行下载插件，如下：<br> <img src="/image/index/3e537972-6203-4643-a25b-f7ad645c3420.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="1、全局配置"><a href="#1、全局配置" class="headerlink" title="1、全局配置"></a>1、全局配置</h3><ul>
+<li>配置用户名和邮箱<br><img src="/image/index/086a0016-2346-46e3-8c06-4f521a81d1d6.png" srcset="/img/loading.gif" lazyload alt="img">  </li>
+<li>user.name：</li>
+<li>user.email：<br><img src="/image/index/7008e271-8d0b-4a1a-a7a5-df308020cd53.png" srcset="/img/loading.gif" lazyload alt="img"> </li>
+<li>配置忽略的文件</li>
+</ul>
+<p><img src="/image/index/13046afb-6f80-456d-9e2a-6b4d2f8b0a55.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<h3 id="2、创建本地库并提交文件"><a href="#2、创建本地库并提交文件" class="headerlink" title="2、创建本地库并提交文件"></a>2、创建本地库并提交文件</h3><p><img src="/image/index/a25091c2-1cb1-4e79-a186-52979883d779.png" srcset="/img/loading.gif" lazyload alt=" "><br> 自动生成<code>.git</code>文件<br> <img src="/image/index/5fa6c03d-49c2-4633-aa00-5bafdcec34f1.png" srcset="/img/loading.gif" lazyload alt="img"><br> 添加到暂存区：<br> <img src="/image/index/1a36090e-fbf0-4a80-906b-b173d491abb0.png" srcset="/img/loading.gif" lazyload alt="img"><br> 提交文件：<br> <img src="/image/index/c7a6d6ab-56e4-440e-b4c7-5a9367c997ae.png" srcset="/img/loading.gif" lazyload alt="img"><br> <img src="/image/index/173dbaaf-e03f-4575-9398-cd50fbf9ce4a.png" srcset="/img/loading.gif" lazyload alt="           ">                                                          </p>
+<h2 id="2、Intellij-IDEA中使用git"><a href="#2、Intellij-IDEA中使用git" class="headerlink" title="2、Intellij IDEA中使用git"></a>2、Intellij IDEA中使用git</h2><p>配置git<br> <img src="/image/index/75ea6817-aa9d-4509-b15f-0a69907fc9b4.png" srcset="/img/loading.gif" lazyload alt="img"><br> 配置gitHub<br> <img src="/image/index/16b0634c-b07b-4252-9442-b162d2a0e6a1.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="1、克隆远程仓库"><a href="#1、克隆远程仓库" class="headerlink" title="1、克隆远程仓库"></a>1、克隆远程仓库</h3><ul>
+<li>方式一：<br><img src="/image/index/48c015b5-9a81-432e-8123-ba10ba534c55.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/c7a0fd01-2136-457e-9001-88c32bee75b5.jpg" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/a059543e-d317-4996-b1ab-4832d0123d15.jpg" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/0cdc9019-293e-434d-8daa-d9a959547c3d.jpg" srcset="/img/loading.gif" lazyload alt="img"><br><img src="/image/index/ae5b3019-976f-4eea-b3db-39703eeddeb2.png" srcset="/img/loading.gif" lazyload alt="img"> </li>
+<li>方式二：<br><img src="/image/index/ee7e4e03-7b75-4607-a4cc-6bde8f55d0dd.png" srcset="/img/loading.gif" lazyload alt="img"></li>
+</ul>
+<h3 id="2、上传本地项目"><a href="#2、上传本地项目" class="headerlink" title="2、上传本地项目"></a>2、上传本地项目</h3><p><img src="/image/index/ee187380-4638-4d09-8613-1583cd0ca9a7.png" srcset="/img/loading.gif" lazyload alt="img"><br> <img src="/image/index/60a1c3db-4e2f-4c26-a7ae-6369cec7abe6.png" srcset="/img/loading.gif" lazyload alt="img"><br> git的一些操作<br> <img src="/image/index/41ddb006-08ec-4449-9c2c-83f3339a709c.png" srcset="/img/loading.gif" lazyload alt="img"> </p>
+<ul>
+<li>clone：拷贝远程仓库</li>
+<li>commit：本地提交</li>
+<li>push：远程提交</li>
+<li>pull：更新到本地</li>
+</ul>
+<p><strong>注意：需要先进行本地提交，才能push到远程仓库</strong><br> 查看本地提交历史；<br> <img src="/image/index/5d4156ca-caa6-428a-a2a8-f3cda952ba6e.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="7、GitHub"><a href="#7、GitHub" class="headerlink" title="7、GitHub"></a>7、GitHub</h1><h2 id="1、GitHub如何配置SSH-Key"><a href="#1、GitHub如何配置SSH-Key" class="headerlink" title="1、GitHub如何配置SSH Key"></a>1、GitHub如何配置SSH Key</h2><blockquote>
+<p>用于连接git</p>
+</blockquote>
+<p><strong>目的</strong></p>
+<ul>
+<li>GitHub配置SSH Key的目的是为了帮助我们在通过git提交代码时，不需要繁琐的验证过程，简化操作流程。</li>
+</ul>
+<p><strong>步骤</strong></p>
+<ol>
+<li><p>设置git的user name和email</p>
+<ul>
+<li><p>git设置用户名和邮箱（同gitHub）</p>
+<blockquote>
+<p>git config命令的–global参数</p>
+</blockquote>
+<ul>
+<li>git config –global user.name 用户名</li>
+<li>git config –global user.email  邮箱</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmd">设置用户名和邮箱：<br><br>$ git config --global user.name &quot;Your Name&quot;<br>$ git config --global user.email &quot;email@example.com&quot;<br><br>注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>eclipse查看&#x2F;设置</p>
+<blockquote>
+<p>Preferences》Team》Git&gt;Configuration</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>检查是否存在SSH Key		</p>
+<ol>
+<li><p>跳转目录：cd ~&#x2F;.ssh（实际绝对路径：&#x2F;c&#x2F;Users&#x2F;用户名&#x2F;.ssh）</p>
+</li>
+<li><p>显示ssh：ls 或者 ll，看是否存在 id_rsa 和 id_rsa.pub文件，如果存在，说明已经有SSH Key</p>
+<blockquote>
+<p>Rsa是算法名称。常用算法有：rsa，dsa。id_rsa.pub是公钥，id_rsa是公钥</p>
+</blockquote>
+</li>
+<li><p>生成SSH key</p>
+<ul>
+<li><p>ssh-keygen -t rsa -C 邮箱 【生成密钥对，回车，自动保存密钥对，默认地址：&#x2F;c&#x2F;Users&#x2F;用户名&#x2F;.ssh】</p>
+<blockquote>
+<p>注意：输入密钥对密码，全部回车则不设置密码</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-operator">&gt;</span><span class="hljs-built_in">Enter</span> <span class="hljs-variable">passphrase</span> <span class="hljs-punctuation">(</span><span class="hljs-variable">empty</span> <span class="hljs-variable">for</span> <span class="hljs-variable">no</span> <span class="hljs-variable">passphrase</span><span class="hljs-punctuation">)</span><span class="hljs-operator">:</span><br><span class="hljs-operator">&gt;</span><span class="hljs-built_in">Enter</span> <span class="hljs-variable">same</span> <span class="hljs-variable">passphrase</span> <span class="hljs-variable">again</span><span class="hljs-operator">:</span><br></code></pre></td></tr></table></figure>
+
+<p>如果输入密码则在每次启动Pageant时，需输入一次密码。若当前工作电脑需多人共用，建议加入密码，并在每次操作完毕后关闭Pageant。</p>
+</blockquote>
+</li>
+<li><p>eclipse创建</p>
+<blockquote>
+<p>window-&gt;preference-&gt;general-&gt;network connections-&gt;ssh2–&gt;Key Management   打开管理页面<br>点击Generate RSA KEY，然后点击Save private key，保存文件</p>
+</blockquote>
+<p><img src="/image/index/1610702400021.png" srcset="/img/loading.gif" lazyload alt="1610702400021"></p>
+</li>
+</ul>
+</li>
+<li><p>获取SSH key</p>
+<blockquote>
+<p>cat id_rsa.pub  &#x2F;&#x2F;手动拷贝秘钥（ssh-rsa开头）</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>GitHub添加SSH Key</p>
+<ol>
+<li>GitHub点击用户头像，选择setting</li>
+<li>新建一个SSH Key，取个名字，把之前拷贝的秘钥复制进去</li>
+</ol>
+</li>
+<li><p>验证和修改</p>
+<ol>
+<li><p>测试是否成功配置SSH Key</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmd">ssh -T git@github.com<br><br>//运行结果出现类似如下<br>Hi xiangshuo1992! You&#x27;ve successfully authenticated, but GitHub does <span class="hljs-keyword">not</span> provide shell access<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改Http的链接为SSH</p>
+<blockquote>
+<p>直接修改项目目录下 .git文件夹下的config文件，将地址修改一下就好了</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  
+</article>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
